@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const EmpDetails = () => {
-  const empid = useParams();
+  const {empid }= useParams();
   console.log(empid,"empid");
   const [datas,setDatas]=useState('')
 
