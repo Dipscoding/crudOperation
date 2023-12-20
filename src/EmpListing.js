@@ -1,10 +1,25 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const EmpListing = () => {
 
     const [empData,setEmpData] = useState('')
+    const navigate = useNavigate()
+
+
+    const loadDetail = (id) =>{ 
+        navigate("/employee/detail/:empid")
+
+
+    }
+    const loadEdit = (id) =>{
+        
+    }
+
+    const deleteFunction = (id) =>{
+
+    }
 
 
 
@@ -72,9 +87,9 @@ const EmpListing = () => {
                                             <td>{item.name}</td>
                                             <td>{item.email}</td>
                                             <td>{item.phone}</td>
-                                            <td><a className='btn btn-success'>EDIT</a>
-                                            <a className='btn btn-danger'>REMOVE</a>
-                                            <a className='btn btn-primary'>DETAILS</a>
+                                            <td><a onClick={()=>loadEdit(item.id)} className='btn btn-success'>EDIT</a>
+                                            <a onClick={()=>deleteFunction(item.id)} className='btn btn-danger'>REMOVE</a>
+                                            <a onClick={()=>loadDetail(item.id)} className='btn btn-primary'>DETAILS</a>
                                             </td>
                                         </tr>
 
