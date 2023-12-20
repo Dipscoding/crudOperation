@@ -9,7 +9,7 @@ const EmpListing = () => {
 
 
     const loadDetail = (id) =>{ 
-        navigate("/employee/detail/:empid")
+        navigate("/employee/detail/"+id)
 
 
     }
