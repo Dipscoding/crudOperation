@@ -4,36 +4,44 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const EmpListing = () => {
 
-    const [empData,setEmpData] = useState('')
+    const [empData, setEmpData] = useState()
     const navigate = useNavigate()
 
 
-    const loadDetail = (id) =>{ 
-        navigate("/employee/detail/"+id)
+    const loadDetail = (id) => {
+        navigate("/employee/detail/" + id)
 
 
     }
-    const loadEdit = (id) =>{
-        
-    }
-
-    const deleteFunction = (id) =>{
+    const loadEdit = (id) => {
+        navigate(`/employee/edit/${id}`)
 
     }
+
+    const deleteFunction =async (id) => {
+        // const empData = {id, name, email, phone, active }
+        const url = `http://localhost:3000/employee/${id}`;
+        try {
+          await axios.delete(url)
+          window.location.reload()
+    
+        } catch (err) {
+          console.log(err);
+        }
+ }
 
 
 
 
     useEffect(() => {
-        // fetch("http://localhost:3000/employee")
 
         const fetchData = async () => {
             try {
                 const result = await axios.get("http://localhost:3000/employee")
                 const data = result.data;
-                console.log(data,"data")
+                console.log(data, "data")
                 setEmpData(data)
-                console.log(empData,"empdata")
+                console.log(empData, "empdata")
                 // const 
             }
 
@@ -47,7 +55,7 @@ const EmpListing = () => {
 
 
 
-    },[])
+    }, [])
 
 
 
@@ -64,7 +72,7 @@ const EmpListing = () => {
                 <div className='card-body'>
                     <div className='divbtn'>
                         <Link to="employee/create" className='btn-btn-success'>
-                        Add New (+)
+                            Add New (+)
                         </Link>
                     </div>
                     <table className="table table-bordered">
@@ -80,16 +88,16 @@ const EmpListing = () => {
                         </thead>
                         <tbody>
                             {
-                                empData && empData.map((item)=>{
+                                empData && empData.map((item) => {
                                     return (
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
                                             <td>{item.name}</td>
                                             <td>{item.email}</td>
                                             <td>{item.phone}</td>
-                                            <td><a onClick={()=>loadEdit(item.id)} className='btn btn-success'>EDIT</a>
-                                            <a onClick={()=>deleteFunction(item.id)} className='btn btn-danger'>REMOVE</a>
-                                            <a onClick={()=>loadDetail(item.id)} className='btn btn-primary'>DETAILS</a>
+                                            <td><a onClick={() => loadEdit(item.id)} className='btn btn-success'>EDIT</a>
+                                                <a onClick={() => deleteFunction(item.id)} className='btn btn-danger'>REMOVE</a>
+                                                <a onClick={() => loadDetail(item.id)} className='btn btn-primary'>DETAILS</a>
                                             </td>
                                         </tr>
 
