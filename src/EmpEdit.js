@@ -14,21 +14,20 @@ const EmpEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const empData = {name, email, phone, active }
+    const empData = { name, email, phone, active }
     const url = `http://localhost:3000/employee/${empid}`;
     try {
       await axios.put(url, empData, {
         headers: { "content-type": "application/json" }
-
       })
       navigate("/")
 
     } catch (err) {
-      console.log(err);
+      navigate("/something/happened")
     }
 
   }
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -111,5 +110,4 @@ const EmpEdit = () => {
     </div>
   )
 }
-
 export default EmpEdit

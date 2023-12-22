@@ -18,20 +18,16 @@ const EmpListing = () => {
 
     }
 
-    const deleteFunction =async (id) => {
-        // const empData = {id, name, email, phone, active }
+    const deleteFunction = async (id) => {
         const url = `http://localhost:3000/employee/${id}`;
         try {
-          await axios.delete(url)
-          window.location.reload()
-    
+            await axios.delete(url)
+            window.location.reload()
+
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
- }
-
-
-
+    }
 
     useEffect(() => {
 
@@ -39,28 +35,14 @@ const EmpListing = () => {
             try {
                 const result = await axios.get("http://localhost:3000/employee")
                 const data = result.data;
-                console.log(data, "data")
                 setEmpData(data)
-                console.log(empData, "empdata")
-                // const 
             }
-
             catch (err) {
                 console.log(err)
             }
         }
         fetchData()
-
-
-
-
-
     }, [])
-
-
-
-
-
 
     return (
         <div className='container'>
